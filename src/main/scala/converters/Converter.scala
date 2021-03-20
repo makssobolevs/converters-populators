@@ -1,4 +1,5 @@
-package com.github.makssobolevs.converters
+package com.github.makssobolevs
+package converters
 
 /**
  * @author makssobolevs

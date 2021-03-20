@@ -1,4 +1,5 @@
-package com.github.makssobolevs.converters
+package com.github.makssobolevs
+package converters
 
 /**
  * Uses populators to make conversion ("chain-of-responsibility"-like pattern applied).

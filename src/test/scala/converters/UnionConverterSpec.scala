@@ -1,4 +1,5 @@
-package com.github.makssobolevs.converters
+package com.github.makssobolevs
+package converters
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
