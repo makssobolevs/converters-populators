@@ -12,7 +12,7 @@ import scala.annotation.implicitNotFound
  *
  * Converter variable definition must have type annotation to help infer types, e.g.
  * {{{
- * val converter: Converter[Dog, Cat] = TypedConverter(populator1, populator2, ...)
+ * val converter: Converter[Dog, Cat] = UnionConverter(populator1, populator2, ...)
  * }}}
  *
  * Field names and types of the [[UnionPopulator.Result]] must match [[T]], otherwise compilation will fail with
