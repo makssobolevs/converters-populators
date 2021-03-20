@@ -1,10 +1,13 @@
 package com.github.makssobolevs
 package converters
 
+import scala.annotation.tailrec
+
 /**
- * Uses populators to make conversion ("chain-of-responsibility"-like pattern applied).
+ * Uses populators to make conversion.
+ * "Chain-of-responsibility"-like pattern applied.
  */
-class DefaultConverter[S, T](protected val emptyTarget: T, protected val populators: Seq[Populator[S, T]])
+final class DefaultConverter[S, T](protected val emptyTarget: T, protected val populators: Seq[Populator[S, T]])
     extends Converter[S, T] {
   require(populators.nonEmpty, "No populators provided")
 
@@ -12,12 +15,12 @@ class DefaultConverter[S, T](protected val emptyTarget: T, protected val populat
    * @inheritdoc
    */
   override def convert(source: S): T = {
-    var target = emptyTarget
+    convertRecursive(source, emptyTarget, populators)
+  }
 
-    for (populator <- populators) {
-      target = populator.populate(source, target)
-    }
-
-    target
+  @tailrec
+  private def convertRecursive(source: S, target: T, populatorsLeft: Seq[Populator[S, T]]): T = populatorsLeft match {
+    case Nil => target
+    case head :: tail => convertRecursive(source, head.populate(source, target), tail)
   }
 }
